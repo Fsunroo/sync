@@ -14,7 +14,7 @@ def Recive(file_name):
             data =s.recv(1024)
             #print('while loop')
         file.close()
-        break
+        
 
 def Send(file_name):
     file = open(os.path.join(SHARED_FOLDER,file_name),'rb')
