@@ -7,14 +7,14 @@ SHARED_FOLDER= '/sdcard/SHARED_FOLDER'
 s = socket()
 def Recive(file_name):
     with open(os.path.join(SHARED_FOLDER,file_name),'wb') as file:
-        while 1:
-            data =s.recv(1024)
-
-            if data == '__Done__'.encode():
-                break
+        data =s.recv(1024)
+        while not data == '__Done__'.encode():
 
             file.write(data)
+            data =s.recv(1024)
+            #print('while loop')
         file.close()
+        break
 
 def Send(file_name):
     file = open(os.path.join(SHARED_FOLDER,file_name),'rb')
