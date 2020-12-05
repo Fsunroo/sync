@@ -1,9 +1,10 @@
 from socket import *
 import os
 
-IP = '192.168.43.10'
+IP = '127.0.0.1'
 PORT = 4444
-SHARED_FOLDER= '/sdcard/SHARED_FOLDER'
+#SHARED_FOLDER= '/sdcard/SHARED_FOLDER'
+SHARED_FOLDER= 'Client Folder'
 s = socket()
 def Recive(file_name):
     with open(os.path.join(SHARED_FOLDER,file_name),'wb') as file:
@@ -12,7 +13,6 @@ def Recive(file_name):
 
             file.write(data)
             data =s.recv(1024)
-            print('while loop')
         file.close()
         print('[file closed]')
         
