@@ -12,8 +12,9 @@ def Recive(file_name):
 
             file.write(data)
             data =s.recv(1024)
-            #print('while loop')
+            print('while loop')
         file.close()
+        print('[file closed]')
         
 
 def Send(file_name):
