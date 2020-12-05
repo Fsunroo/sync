@@ -1,6 +1,7 @@
 from socket import *
 import os
-IP = '127.0.0.1'
+#IP = '127.0.0.1'
+IP = '192.168.43.10'
 PORT = 4444
 SHARED_FOLDER= 'Server Folder'
 

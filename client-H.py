@@ -1,10 +1,10 @@
 from socket import *
 import os
 
-IP = '127.0.0.1'
+IP = '192.168.43.10'
 PORT = 4444
-#SHARED_FOLDER= '/sdcard/SHARED_FOLDER'
-SHARED_FOLDER= 'Client Folder'
+SHARED_FOLDER= '/sdcard/SHARED_FOLDER'
+#SHARED_FOLDER= 'Client Folder'
 s = socket()
 def Recive(file_name):
     with open(os.path.join(SHARED_FOLDER,file_name),'wb') as file:
@@ -39,8 +39,6 @@ print(f'[ServerOnly File list recived: {get_list}')
 print('[reciving clientOnly File list')
 send_list = s.recv(1024).decode().split()     #4-Recive ClientOnly Files List 
 print(f'[ClientOnly File list recived: {send_list}')
-print(get_list)
-print(send_list)
 for file_name in get_list:
     print(f'[Reciving {file_name} from server')
     Recive(file_name)
