@@ -10,7 +10,7 @@ s = socket()
 def Recive(file_name):
     with open(os.path.join(SHARED_FOLDER,file_name),'wb') as file:
         data =s.recv(1024)
-        while not data == '__Done__'.encode():
+        while data:
             file.write(data)
             data =s.recv(1024)
         file.close()

@@ -24,7 +24,7 @@ def Send(file_name):
     while data:
         conn.send(data)
         data = file.read(1024)
-    conn.send('__Done__'.encode())
+    conn.send('')
 
 
 def Recive(file_name):
@@ -55,12 +55,12 @@ print(f'client files are: {client_files}')
 
 send_list,get_list = comprehence(client_files)
 print('[sending ServerOnly file list]')
-send_msg = ' '.join(send_list).encode()
+send_msg = ' '.join(send_list).encode('utf-8')
 send_msg += b'-'*(1024-len(send_msg))
 conn.send(send_msg)                                                      #3-Send ServerOnly Files list
 print('[ServerOnly file list sent]')
 print('[sending ClientOnly file list]')
-get_msg = ' '.join(get_list).encode()
+get_msg = ' '.join(get_list).encode('utf-8')
 get_msg += b'-'*(1024-len(send_msg))
 conn.send(get_msg)                                                       #4-Send ClientOnly Files list
 print('[ClientOnly file list sent]')
