@@ -61,6 +61,7 @@ send_msg = ' '.join(send_list).encode('utf-8')
 conn.send(send_msg)                                                      #3-Send ServerOnly Files list
 print(f'[ServerOnly file list sent: {send_msg}]')
 get_msg = ' '.join(get_list).encode('utf-8')
+get_msg+=b'-'*(1024-len(get_msg))
 conn.send(get_msg)                                                       #4-Send ClientOnly Files list
 print(f'[ClientOnly file list sent: {get_msg}]')
 
