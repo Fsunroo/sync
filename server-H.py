@@ -37,6 +37,8 @@ def Recive(file_name):
             data =conn.recv(1024)
         file.close()
         print('[file closed]')
+        conn.shutdown(SHUT_RDWR)
+        conn.close()
 
 
 
@@ -76,3 +78,6 @@ for file_name in get_list:
     print(f'[Reciving {file_name} from client')
     Recive(file_name)
     print(f'{file_name} seccssesfully! recived')
+    print('accepting..')
+    conn, addr = s.accept()
+    print('accepted')

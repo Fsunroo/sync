@@ -15,6 +15,8 @@ def Recive(file_name):
             data =s.recv(1024)
         file.close()
         print('[file closed]')
+        s.shutdown(SHUT_RDWR)
+        s.close()
         
 
 def Send(file_name):
@@ -23,8 +25,8 @@ def Send(file_name):
     while data:
         s.send(data)
         data = file.read(1024)
-    conn.shutdown(SHUT_RDWR)
-    conn.close()
+    s.shutdown(SHUT_RDWR)
+    s.close()
 
 def reconnect():
     s = socket()    
@@ -52,4 +54,5 @@ for file_name in get_list:
 for file_name in send_list:
     print(f'[sending {file_name}  to server')
     Send(file_name)
-    print(f'{file_name} seccssesfully! sent') 
+    print(f'{file_name} seccssesfully! sent')
+    s.connect((IP, PORT)) 
