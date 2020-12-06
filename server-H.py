@@ -53,13 +53,13 @@ s.listen(100)
 conn, addr = s.accept()                                                  #1-Accept Client Connection
 print(f'[connection accepted from {addr}]')
 
-client_files = conn.recv(1024).decode().split(' ')                       #2-Recive Client File List
+client_files = conn.recv(1024).decode().split('*&*')                       #2-Recive Client File List
 
 send_list,get_list = comprehence(client_files)
-send_msg = ' '.join(send_list).encode('utf-8')
+send_msg = '*&*'.join(send_list).encode('utf-8')
 conn.send(send_msg)                                                      #3-Send ServerOnly Files list
 print(f'[ServerOnly file list sent: {send_list}]')
-get_msg = ' '.join(get_list).encode('utf-8')
+get_msg = '*&*'.join(get_list).encode('utf-8')
 get_msg+=b'-'*(1024-len(get_msg))
 conn.send(get_msg)                                                       #4-Send ClientOnly Files list
 print(f'[ClientOnly file list sent: {get_list}]')

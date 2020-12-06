@@ -34,13 +34,13 @@ def reconnect():
 
 s.connect((IP, PORT))
 print(f'[Connected to {IP}:{PORT}]')
-s.send(" ".join(os.listdir(SHARED_FOLDER)).encode()) 
+s.send("*&*".join(os.listdir(SHARED_FOLDER)).encode()) 
 print('[client File list send]')
 get_msg = s.recv(1024)
-get_list = get_msg.decode('utf-8',errors = 'ignore').split(' ')
+get_list = get_msg.decode('utf-8',errors = 'ignore').split('*&*')
 print(f'[ServerOnly File list recived: {get_list}]')
 send_msg = s.recv(1024)
-send_list = send_msg.decode('utf-8',errors = 'ignore').replace('-','').split(' ')
+send_list = send_msg.decode('utf-8',errors = 'ignore').replace('-','').split('*&*')
 print(f'[ClientOnly File list recived: {send_list}]')
 for file_name in get_list:
     print(f'[Reciving {file_name} from server]')
