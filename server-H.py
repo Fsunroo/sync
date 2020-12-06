@@ -24,17 +24,19 @@ def Send(file_name):
     while data:
         conn.send(data)
         data = file.read(1024)
-    conn.shutdown(SHUT_RDWR)
+    conn.send('__Done__'.encode())
+
 
 def Recive(file_name):
     with open(os.path.join(SHARED_FOLDER,file_name),'wb') as file:
         data =conn.recv(1024)
-        while not data == '__Done__'.encode():
+        while not data == '__Done__'.encode() :
 
             file.write(data)
             data =conn.recv(1024)
         file.close()
         print('[file closed]')
+
 
 
 
@@ -53,10 +55,14 @@ print(f'client files are: {client_files}')
 
 send_list,get_list = comprehence(client_files)
 print('[sending ServerOnly file list]')
-conn.send(' '.join(send_list).encode())                                  #3-Send ServerOnly Files list
+send_msg = ' '.join(send_list).encode()
+send_msg += b'-'*(1024-len(send_msg))
+conn.send(send_msg)                                                      #3-Send ServerOnly Files list
 print('[ServerOnly file list sent]')
 print('[sending ClientOnly file list]')
-conn.send(' '.join(get_list).encode())                                   #4-Send ClientOnly Files list
+get_msg = ' '.join(get_list).encode()
+get_msg += b'-'*(1024-len(send_msg))
+conn.send(get_msg)                                                       #4-Send ClientOnly Files list
 print('[ClientOnly file list sent]')
 
 for file_name in send_list:
