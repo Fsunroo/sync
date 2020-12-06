@@ -8,5 +8,7 @@ a simple Socket Programming for syncing a folder between different devices.
 3- enjoy
 
 
-#To Do List:
+# To Do List:
 - sync clipboard
+- support empty file list
+- show percent bar process
