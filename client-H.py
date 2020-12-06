@@ -23,7 +23,7 @@ def Send(file_name):
     while data:
         s.send(data)
         data = file.read(1024)
-    s.send('__Done__'.encode())
+    s.shutdown(SHUT_RDWR)
 
 
 

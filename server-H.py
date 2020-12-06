@@ -24,7 +24,7 @@ def Send(file_name):
     while data:
         conn.send(data)
         data = file.read(1024)
-    conn.send('__Done__'.encode())
+    conn.shutdown(SHUT_RDWR)
 
 def Recive(file_name):
     with open(os.path.join(SHARED_FOLDER,file_name),'wb') as file:
