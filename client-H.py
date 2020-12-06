@@ -4,7 +4,7 @@ import os
 #IP = '127.0.0.1'
 IP = '192.168.43.10'
 PORT = 4444
-SHARED_FOLDER= '/sdcard/SHARED_FOLDER'
+SHARED_FOLDER= '/sdcard/SHARED_FOLDER/'
 #SHARED_FOLDER= 'Client Folder'
 s = socket()
 def Recive(file_name):
@@ -32,17 +32,17 @@ def reconnect():
     s = socket()    
     s.connect((IP, PORT))
 
-print('[Connecting...]')
-s.connect((IP, PORT))                                                    #1-Connect
+s.connect((IP, PORT))
 print(f'[Connected to {IP}:{PORT}]')
-print('[sending client File list]')
-s.send(" ".join(os.listdir(SHARED_FOLDER)).encode())                     #2-Send Client Folder List
+s.send(" ".join(os.listdir(SHARED_FOLDER)).encode()) 
 print('[client File list send]')
-print('[reciving ServerOnly File list')
-get_list = s.recv(1024).decode('utf-8',errors = 'ignore').split(' ')               #3-Recive ServerOnly Files List
+get_msg = s.recv(1024)
+print(get_msg)
+get_list = get_msg.decode('utf-8',errors = 'ignore').split(' ')
 print(f'[ServerOnly File list recived: {get_list}')
-print('[reciving clientOnly File list')
-send_list = s.recv(1024).decode('utf-8',errors = 'ignore').split(' ')                                #4-Recive ClientOnly Files List 
+send_msg = s.recv(1024)
+print(send_msg)
+send_list = send_msg.decode('utf-8',errors = 'ignore').split(' ')
 print(f'[ClientOnly File list recived: {send_list}')
 for file_name in get_list:
     print(f'[Reciving {file_name} from server')

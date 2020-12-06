@@ -57,14 +57,12 @@ client_files = conn.recv(1024).decode().split(' ')                       #2-Reci
 print(f'client files are: {client_files}')
 
 send_list,get_list = comprehence(client_files)
-print('[sending ServerOnly file list]')
 send_msg = ' '.join(send_list).encode('utf-8')
 conn.send(send_msg)                                                      #3-Send ServerOnly Files list
-print('[ServerOnly file list sent]')
-print('[sending ClientOnly file list]')
+print(f'[ServerOnly file list sent: {send_msg}]')
 get_msg = ' '.join(get_list).encode('utf-8')
 conn.send(get_msg)                                                       #4-Send ClientOnly Files list
-print('[ClientOnly file list sent]')
+print(f'[ClientOnly file list sent: {get_msg}]')
 
 for file_name in send_list:
     print(f'[sending {file_name}  to client')
