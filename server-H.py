@@ -45,26 +45,26 @@ s = socket()
 s.bind((IP,PORT))
 print(f'[binded to {IP}:{PORT}]')
 s.listen(100)
-conn, addr = s.accept()                                                 #1-Accept Client Connection
+conn, addr = s.accept()                                                  #1-Accept Client Connection
 print(f'[connection accepted from {addr}')
 
-client_files = conn.recv(1024).decode().split(' ')                      #2-Recive Client File List
+client_files = conn.recv(1024).decode().split(' ')                       #2-Recive Client File List
 print(f'client files are: {client_files}')
 
 send_list,get_list = comprehence(client_files)
 print('[sending ServerOnly file list]')
-conn.send(' '.join(send_list).encode())                 #3-Send ServerOnly Files list
+conn.send(' '.join(send_list).encode())                                  #3-Send ServerOnly Files list
 print('[ServerOnly file list sent]')
 print('[sending ClientOnly file list]')
-conn.send(' '.join(get_list).encode())                  #4-Send ClientOnly Files list
+conn.send(' '.join(get_list).encode())                                   #4-Send ClientOnly Files list
 print('[ClientOnly file list sent]')
 
 for file_name in send_list:
     print(f'[sending {file_name}  to client')
     Send(file_name)  
-    print(f'{file_name} seccssesfully! sent')                                                   #5-Send ServerOnly Files 
+    print(f'{file_name} seccssesfully! sent')                            #5-Send ServerOnly Files 
 
 for file_name in get_list:
     print(f'[Reciving {file_name} from client')
     Recive(file_name)
-    print(f'{file_name} seccssesfully! recived')                                                   #5-Send ServerOnly Files 
+    print(f'{file_name} seccssesfully! recived')                         #5-Send ServerOnly Files 
