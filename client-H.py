@@ -48,6 +48,7 @@ for file_name in get_list:
     print(f'[Reciving {file_name} from server')
     Recive(file_name)
     print(f'{file_name} seccssesfully! recived')
+    s = socket()
     s.connect((IP, PORT))
     print('connected again') 
 
@@ -55,4 +56,5 @@ for file_name in send_list:
     print(f'[sending {file_name}  to server')
     Send(file_name)
     print(f'{file_name} seccssesfully! sent')
+    s = socket()
     s.connect((IP, PORT)) 
